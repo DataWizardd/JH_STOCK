@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Mode</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        body {
+            padding-top: 50px;
+        }
+        .container {
+            max-width: 800px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .welcome-message {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">JH 증권</a>
+            <% if (user) { %>
+                <div class="welcome-message">환영합니다 <%= user.username %>님!</div>
+            <% } %>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="section">
+            <h2><a href="/stock-info">주식 시세 조회</a></h2>
+        </div>
+        <div class="section">
+            <h2><a href="/portfolio">나의 포트폴리오 관리</a></h2>
+        </div>
+        <div class="section">
+            <h2><a href="/watchlist">나의 관심종목 관리</a></h2> <!-- 관심종목 관리 링크 추가 -->
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio List</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        td:last-child {
+            text-align: center;
+        }
+        button {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #c82333;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>포트폴리오 목록</h1>
+        <a href="/admin/portfolio/new">포트폴리오 추가</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>사용자 ID</th>
+                    <th>심볼</th>
+                    <th>수량</th>
+                    <th>총 가격</th>
+                    <th>작업</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% portfolios.forEach(portfolio => { %>
+                    <tr>
+                        <td><%= portfolio.id %></td>
+                        <td><%= portfolio.user_id %></td>
+                        <td><%= portfolio.symbol %></td>
+                        <td><%= portfolio.quantity %></td>
+                        <td><%= portfolio.total_price %></td>
+                        <td>
+                            <a href="/admin/portfolio/edit/<%= portfolio.id %>">수정</a>
+                            <form action="/admin/portfolio/delete/<%= portfolio.id %>" method="post" style="display: inline;">
+                                <button type="submit">삭제</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <a href="/admin" class="back-btn">뒤로</a>
+    </div>
+</body>
+</html>

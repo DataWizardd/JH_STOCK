@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Watchlist</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        button {
+            background-color: transparent;
+            border: none;
+            color: #007bff;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        button:hover {
+            color: #0056b3;
+        }
+
+        .action-column {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>사용자 관심종목 목록</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>사용자 ID</th>
+                    <th>심볼</th>
+                    <th>작업</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% watchlists.forEach(watchlist => { %>
+                    <tr>
+                        <td><%= watchlist.id %></td>
+                        <td><%= watchlist.user_id %></td>
+                        <td><%= watchlist.symbol %></td>
+                        <td class="action-column">
+                            <!-- Watchlist 수정 링크 -->
+                            <a href="/admin/watchlist/edit/<%= watchlist.id %>">수정</a>
+                            <!-- Watchlist 삭제 폼 -->
+                            <form action="/admin/watchlist/delete/<%= watchlist.id %>" method="post">
+                                <button type="submit">삭제</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <!-- Watchlist 추가 링크 -->
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="/admin/watchlist/add" style="margin-right: 10px;">추가</a>
+            <a href="/admin">뒤로</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Stock List</title>
+    <!-- CSS 파일 링크 -->
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f8f8f8;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        button {
+            padding: 3px 6px; /* Smaller padding for smaller buttons */
+            background-color: #dc3545;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px; /* Adjust font size if needed */
+        }
+        button:hover {
+            background-color: #c82333;
+        }
+        .section {
+            text-align: center;
+        }
+        .section h2 a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .section h2 a:hover {
+            text-decoration: underline;
+        }
+        form input[type="text"] {
+            padding: 5px;
+            margin-right: 10px;
+        }
+        form button {
+            margin-left: 5px; /* Adjust margin to align buttons closer to inputs */
+            padding: 3px 6px; /* Smaller padding for smaller buttons */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>JH 증권 [관리자 모드] - 주식 목록 조회</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>심볼</th>
+                    <th>가격</th>
+                    <th>거래량</th>
+                    <th>타임스탬프</th>
+                    <th>수정</th>
+                    <th>삭제</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% stocks.forEach(stock => { %>
+                    <tr>
+                        <td><%= stock.symbol %></td>
+                        <td><%= stock.price %></td>
+                        <td><%= stock.volume %></td>
+                        <td><%= stock.timestamp %></td>
+                        <td>
+                            <form action="/admin/stock/edit/<%= stock.symbol %>" method="POST">
+                                <input type="text" name="price" placeholder="가격" value="<%= stock.price %>">
+                                <input type="text" name="volume" placeholder="거래량" value="<%= stock.volume %>">
+                                <button type="submit">수정</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/admin/stock/delete/<%= stock.symbol %>" method="POST">
+                                <button type="submit">삭제</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+
+        <h2>주식 추가</h2>
+        <form action="/admin/stock/add" method="POST">
+            <input type="text" name="symbol" placeholder="심볼">
+            <input type="text" name="price" placeholder="가격">
+            <input type="text" name="volume" placeholder="거래량">
+            <button type="submit">추가</button>
+        </form>
+
+        <div class="section">
+            <h2><a href="/admin">돌아가기</a></h2>
+        </div>
+    </div>
+</body>
+</html>

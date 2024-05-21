@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Information</title>
+    <link rel="stylesheet" href="/styles.css">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* 추가된 CSS */
+        body {
+            font-family: Arial, sans-serif; /* 폰트 설정 */
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>주식 시세</h1>
+    <table>
+        <tr>
+            <th>Symbol</th>
+            <th>Price</th>
+            <th>Volume</th>
+            <th>Timestamp</th>
+        </tr>
+        <% Stocks.forEach(function(stock) { %>
+            <tr>
+                <td><%= stock.symbol %></td>
+                <td><%= stock.price %></td>
+                <td><%= stock.volume %></td>
+                <td><%= stock.timestamp %></td>
+            </tr>
+        <% }); %>
+    </table>
+</body>
+</html>

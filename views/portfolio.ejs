@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 포트폴리오 관리</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>나의 포트폴리오</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>주식 심볼</th>
+                    <th>수량</th>
+                    <th>총 가격</th>
+                    <th>삭제</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% portfolio.forEach(item => { %>
+                    <tr>
+                        <td><%= item.symbol %></td>
+                        <td><%= item.quantity %></td>
+                        <td><%= item.total_price %></td>
+                        <td>
+                            <button type="button" class="btn btn-danger" onclick="deletePortfolio('<%= item.id %>')">삭제</button>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <h2>수량 수정</h2>
+        <div class="form-group">
+            <label for="portfolioId">포트폴리오 항목 선택</label>
+            <select class="form-control" id="portfolioId">
+                <% portfolio.forEach(item => { %>
+                    <option value="<%= item.id %>"><%= item.symbol %> - <%= item.quantity %>개</option>
+                <% }) %>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="newQuantity">새로운 수량 입력</label>
+            <input type="number" class="form-control" id="newQuantity" name="newQuantity" min="1" required>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="updateQuantity()">수정</button>
+        
+        <!-- 주식 추가 폼 -->
+        <h2>주식 추가</h2>
+        <form action="/portfolio" method="POST">
+            <div class="form-group">
+                <label for="symbol">주식 심볼</label>
+                <input type="text" class="form-control" id="symbol" name="symbol" required>
+            </div>
+            <div class="form-group">
+                <label for="quantity">수량</label>
+                <input type="number" class="form-control" id="quantity" name="quantity" min="1" required>
+            </div>
+            <button type="submit" class="btn btn-primary">추가</button>
+        </form>
+    </div>
+
+    <script>
+        function deletePortfolio(id) {
+            if (confirm('정말 삭제하시겠습니까?')) {
+                fetch('/portfolio/' + id, {
+                    method: 'DELETE'
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload();
+                    } else {
+                        window.location.reload();
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        }
+        function updateQuantity() {
+    const portfolioId = document.getElementById('portfolioId').value;
+    const newQuantity = document.getElementById('newQuantity').value;
+    fetch(`/portfolio/edit/${portfolioId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded' // 폼 데이터로 변경
+        },
+        body: `quantity=${newQuantity}` // 데이터 형식 변경
+    })
+    .then(response => {
+        if (response.ok) {
+            window.location.reload();
+        } else {
+            window.location.reload();
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+
+
+
+    </script>
+</body>
+</html>
