@@ -19,6 +19,6 @@ JH 증권 웹 페이지는 사용자와 관리자 모드로 나누어져 있으�
 * 나의 관심종목 관리 : 개인의 관심 종목 목록을 관리할 수 있습니다.
 
 ## 기술스택
-프론트엔드: HTML, CSS, JavaScript
-백엔드 : Node.js
-데이터베이스: MySQL
+* 프론트엔드: HTML, CSS, JavaScript
+* 백엔드 : Node.js
+* 데이터베이스: MySQL
